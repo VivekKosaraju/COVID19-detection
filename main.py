@@ -12,7 +12,6 @@ import streamlit as st
 
 # Keras
 from keras.applications.mobilenet_v2 import MobileNetV2
-from keras.applications.mobilenet_v2 import preprocess_input
 from keras.models import load_model
 from keras.preprocessing import image
 from keras.preprocessing.image import img_to_array
@@ -26,7 +25,7 @@ from PIL import Image, ImageOps
 
 #@st.cache(suppress_st_warning=True)
 def models():
-    model=load_model('models/modes')
+    model=load_model('models/mobile_final')
     model.summary()
     return model
     
@@ -34,17 +33,16 @@ def models():
 
     
 def model_predict(img_path, model):
-    #img = image.load_img(img_path,target_size=(224,224,3), grayscale=False)
     # Preprocessing the image
     image = Image.open(img_path).convert('RGB')
     size = (224,224)
     image = ImageOps.fit(image, size)
-    #image = cv2.imread(image)
     image = img_to_array(image)
     image= np.expand_dims(image, axis = 0)
     image = np.array(image) / 255.0
     outs=['COVID +ve','COVID -ve']
-    preds=model.predict_classes(image)
+    preds=model.predict(image)
+    preds=preds.argmax(axis=1)
     preds=outs[preds[0]]
     return preds
 

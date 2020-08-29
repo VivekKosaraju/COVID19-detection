@@ -16,7 +16,6 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.preprocessing.image import img_to_array
 import tensorflow.keras.backend as K
-import cv2
 from werkzeug.utils import secure_filename
 import h5py
 import os

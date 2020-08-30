@@ -24,7 +24,7 @@ from PIL import Image, ImageOps
 
 #@st.cache(suppress_st_warning=True)
 def models():
-    model=load_model('mobilenet.h5')
+    model=load_model('model')
     model.summary()
     return model
     

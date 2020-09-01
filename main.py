@@ -22,7 +22,7 @@ import os
 import io
 from PIL import Image, ImageOps
 
-
+@st.cache(suppress_st_warning=True,allow_output_mutation=True)
 def models():
     model=load_model('model')
     model.summary()
